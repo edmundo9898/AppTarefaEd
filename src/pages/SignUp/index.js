@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { StatusBar } from 'expo-status-bar';
 
 import { useNavigation } from '@react-navigation/native';
@@ -7,6 +7,9 @@ import {Container, TextLogo, AreaInput, BtnLogin, Textbtn, Link, TextLink, Submi
 
 import { FontAwesome5 } from '@expo/vector-icons';
 
+import { AuthContext } from '../../Context/auth';
+
+
 export default function SignUp() {
 
     const navigation = useNavigation();
@@ -14,10 +17,11 @@ export default function SignUp() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
+    const {user} = useContext(AuthContext);
 
     function TesteNave(){
         navigation.navigate('SignIn');
+        console.log(user.nome)
     }
 
 
