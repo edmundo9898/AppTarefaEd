@@ -7,7 +7,8 @@ import {Container, TextLogo, AreaInput, BtnLogin, Textbtn, Link, TextLink, Submi
 
 import { FontAwesome5 } from '@expo/vector-icons';
 
-import { AuthContext } from '../../Context/auth';
+import {AuthContext} from '../../Context/auth';
+ 
 
 
 export default function SignUp() {
@@ -17,13 +18,15 @@ export default function SignUp() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {user} = useContext(AuthContext);
+    
+    // chamando a função de cadastro na pasta Context 
+    const {signUp} = useContext(AuthContext);
 
-    function TesteNave(){
-        navigation.navigate('SignIn');
-        console.log(user.nome)
-    }
-
+   
+   //chamando a função Para cadastrar no firebase
+   function register(){
+       signUp(email, password, nome)
+   }
 
 
  return (
@@ -58,13 +61,13 @@ export default function SignUp() {
        onChangeText={ (text) => setPassword(text)}
        />
 
-       <SubmitBtn >
+       <SubmitBtn  onPress={register} >
            <Textbtn>
                Cadastrar
            </Textbtn>
        </SubmitBtn>
 
-       <Link onPress={() => TesteNave()}>
+       <Link onPress={() => navigation.navigate('Login')}>
            <TextLink>
                Já tem conta?
            </TextLink>

@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, TouchableOpacity } from 'react-native';
+
 
 import { AntDesign } from '@expo/vector-icons';
 
+import {AuthContext} from '../../Context/auth';
 
 import { Container, ContainerTextStart ,TextStart, AreaList, AreaAdd, InputAdd, BtnAdd, BtnAddText } from './styles';
 
 import  TesteList  from '../../TesteList';
 
+ 
 
 
  const list = [
@@ -20,19 +23,21 @@ import  TesteList  from '../../TesteList';
  ]
 
 export default function Home() {
-    function TestandoBtn(){
-      alert('Funcionando')
-    }
+
+    const {user, signOut} = useContext(AuthContext);
+    
+  
+   
 
 
   return (
     <Container>
       <ContainerTextStart>
         <TextStart>
-          AppTarefaEd
+          Bem vindo  {user && user.nome} !!
         </TextStart>
 
-        <TouchableOpacity onPress={TestandoBtn}>
+        <TouchableOpacity onPress={() => signOut()}>
           <AntDesign name="logout" size={30} color="#fff" />
         </TouchableOpacity>
       </ContainerTextStart>
@@ -52,7 +57,7 @@ export default function Home() {
         placeholder='Qual tarefa vai fazer hoje?'
         />
 
-        <BtnAdd onPress={TestandoBtn}>
+        <BtnAdd>
         <AntDesign name="pluscircle" size={40} color="#fff" />
         </BtnAdd>
       </AreaAdd>

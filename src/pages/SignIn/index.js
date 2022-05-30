@@ -17,23 +17,14 @@ export default function SignIn() {
     const navigation = useNavigation();  
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
- // Criando o context para a tela ter acesso ao value user.
-    const {user} = useContext(AuthContext);
-    //Navegação para tela de cadastro
 
+   // Criando o context para a tela ter acesso ao value user.
+   const {signIn} = useContext(AuthContext);
 
-    function TesteNave(){
-        navigation.navigate('SignUp');
-
-    }
     
-    //Navegação para a tela Home se o usuario e senha for verdadeiro
-    function TesteHome(){
-        navigation.navigate('Home')
-        console.log(user.nome);
-        console.log(user.uid);
-    }
-
+  function accessSignIn(){
+      signIn(email, password);
+  }
 
 
  return (
@@ -64,13 +55,13 @@ export default function SignIn() {
        onChangeText={ (text) => setPassword(text)}
        />
 
-       <SubmitBtn onPress={() => TesteHome()}>
+       <SubmitBtn onPress={accessSignIn}>
            <Textbtn>
                Acessar
            </Textbtn>
        </SubmitBtn>
 
-       <Link onPress={() => TesteNave()}>
+       <Link onPress={() => navigation.navigate('SignUp')}>
            <TextLink>
                Não tem conta ?
            </TextLink>
