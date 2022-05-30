@@ -30,13 +30,6 @@ function AuthRoutes(){
             }}
             />
 
-            <AuthStack.Screen 
-            name='Home'
-            component={Home}
-            options={{
-                headerShown:false
-            }}
-            />
 
         </AuthStack.Navigator>
 
