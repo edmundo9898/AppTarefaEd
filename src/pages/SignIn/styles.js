@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 
 export const Container = styled.View`
-background-color: #009933;
+background-color: #121212;
 flex: 1;
 align-items: center;
 justify-content: center;
@@ -38,7 +38,7 @@ border-color: #000;
 border-radius: 10px;
 align-items: center;
 justify-content: center;
-background-color: #000;
+background-color:  #009900;
 `; 
 
 export const Textbtn = styled.Text`

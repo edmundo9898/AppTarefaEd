@@ -1,64 +1,103 @@
-import React, {useContext} from 'react';
-import { View, TouchableOpacity } from 'react-native';
-
-
+import React, {useState , useContext, useEffect} from 'react';
+import { View, TouchableOpacity, Keyboard } from 'react-native';
+import firebase from '../../services/FirebaseConnection';
 import { AntDesign } from '@expo/vector-icons';
-
 import {AuthContext} from '../../Context/auth';
-
 import { Container, ContainerTextStart ,TextStart, AreaList, AreaAdd, InputAdd, BtnAdd, BtnAddText } from './styles';
-
 import  TesteList  from '../../TesteList';
 
- 
-
-
- const list = [
-   {key: '1', name: 'Estudar ReactNative'},
-   {key: '2', name: 'Estudar assuntos da Faculdade e depois jogar jogo de tiru jogo de tiro man'},
-   {key: '3', name: 'Planejamento'},
-   {key: '4', name: 'Descansar a mente'},
-   
-   
- ]
 
 export default function Home() {
 
-    const {user, signOut} = useContext(AuthContext);
+                     
+      const {user, signOut} = useContext(AuthContext);  
+      const[tasks, setTasks] = useState([]);
+
+      const [newTask, setnewTask] = useState('');
+
+      // as tarefá vai aparecer ao acessar o aplicativo ( se caso já tiver tarefa cadastrada)
+      useEffect(() =>  {
+           async function loadTasks(){
+
+             let uid = user.uid
+             
+             await firebase.database().ref('HistóricoTarefas').child(uid).once('value', (snapshot) => {
+               setTasks([]);
+
+               snapshot.forEach((childItem) => {
+                 let tarefaLists = {
+                   key: childItem.key,
+                   nome: childItem.val().nome,
+                 };
+                 setTasks(oldArray => [...oldArray, tarefaLists])
+               })
+             })
+           }
+
+           loadTasks();
+        
+
+      },[])
+
+      // Adicionando Tarefa
+     async  function TaskAdd(){   
+      //não vai fazer nada se caso o input tiver em branco
+      if(newTask === ''){
+        return;
+      }   
+      let uid = user.uid;
     
-  
-   
+      let tarefas = await firebase.database().ref('HistóricoTarefas').child(uid)
+       // criando uma key para cada tarefa criada dentro do usuario logado
+      let chave = tarefas.push().key;
+      // cadastrando a tarefa por chave no firebase e mostrando na lista
+      tarefas.child(chave).set({
+          nome: newTask,
+           
+      })
+     .then(() => {
+       const data = {
+         key: chave,
+         nome: newTask
+       };
+
+       setTasks(oldTasks => [...oldTasks, data])
+
+     })
+     Keyboard.dismiss();
+     setnewTask('');
+    }
+
 
 
   return (
     <Container>
       <ContainerTextStart>
         <TextStart>
-          Bem vindo  {user && user.nome} !!
+          Olá, {user && user.nome} !!
         </TextStart>
 
         <TouchableOpacity onPress={() => signOut()}>
-          <AntDesign name="logout" size={30} color="#fff" />
+          <AntDesign name="logout" size={30} color="#00cc44" />
         </TouchableOpacity>
       </ContainerTextStart>
       
-
       <AreaList
-      data={list}
+      data={tasks}
       keyExtractor={item => item.key}
-      renderItem={({item}) => ( <TesteList data={item} />) }
+      renderItem={({item}) =>  (<TesteList data={item} />) }
       
       />
-
-     
         
       <AreaAdd>
         <InputAdd
         placeholder='Qual tarefa vai fazer hoje?'
+        value={newTask}
+        onChangeText={(text) => setnewTask(text)}
         />
 
-        <BtnAdd>
-        <AntDesign name="pluscircle" size={40} color="#fff" />
+        <BtnAdd onPress={TaskAdd}>
+        <AntDesign name="pluscircle" size={40} color="#00cc44" />
         </BtnAdd>
       </AreaAdd>
 

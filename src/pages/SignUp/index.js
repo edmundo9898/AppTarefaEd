@@ -31,10 +31,9 @@ export default function SignUp() {
 
  return (
    <Container>
-       <StatusBar/>
+       <StatusBar backgroundColor='orange'/>
 
        {/* <TextLogo>AppTarefaEd</TextLogo> */}
-       <FontAwesome5 name="clipboard-list" size={90} color="black"/>
 
        <AreaInput
        style={{marginTop: 50}}
@@ -57,6 +56,7 @@ export default function SignUp() {
        placeholder="Password"
        autoCorrect={false}
        autoCapitalize='none'
+       secureTextEntry={true}
        value={password}
        onChangeText={ (text) => setPassword(text)}
        />
@@ -67,7 +67,7 @@ export default function SignUp() {
            </Textbtn>
        </SubmitBtn>
 
-       <Link onPress={() => navigation.navigate('Login')}>
+       <Link onPress={() => navigation.navigate('SignIn')}>
            <TextLink>
                Já tem conta?
            </TextLink>

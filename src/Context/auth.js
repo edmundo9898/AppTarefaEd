@@ -13,6 +13,8 @@ function AuthProvider({children}){
     const [user, setUser] = useState()  
     const [loading, setLoading] = useState(true)
 
+
+
     useEffect(() => {
          async function loadStorage(){
              const storageUser = await AsyncStorage.getItem('Auth_user');
@@ -58,6 +60,7 @@ function AuthProvider({children}){
         })
     }
 
+     // função para acessar 
     async function signIn(email, password){
         await firebase.auth().signInWithEmailAndPassword(email,password)
         .then( async (value) => {
@@ -94,6 +97,9 @@ function AuthProvider({children}){
             
         })
     }
+
+    
+   
 
 
   // tudo dentro de  authcontext.provider vai poder acessar o USER

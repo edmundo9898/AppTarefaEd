@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Container = styled.View`
 flex: 1;
-background-color: #009933;
+background-color: #121212;
 align-items: center;
 justify-content: center;
 
@@ -17,13 +17,13 @@ align-items: center;
 justify-content: space-between ;
 margin-bottom: 15px;
 margin-top: 40px;
-padding-left: 10px;
+padding-left: 15px;
 padding-right: 30px;
 flex-direction: row;
 `;
 
 export const TextStart = styled.Text`
-color: #fff;
+color: #00cc44;
 font-size: 25px;
 font-weight: bold;
 `;

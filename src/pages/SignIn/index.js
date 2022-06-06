@@ -34,23 +34,26 @@ export default function SignIn() {
    //Já comeco como True
    enabled
    >
-       <StatusBar/>
+       <StatusBar backgroundColor='orange'/>
        {/* <TextLogo>AppTarefaEd</TextLogo> */}
-       <FontAwesome5 name="clipboard-list" size={90} color="black"/>
+       <FontAwesome5 name="clipboard-list" size={90} color="orange"/>
 
        <AreaInput
-       style={{marginTop: 50}}
+       style={{marginTop: 20}}
        placeholder="Email"
        autoCorrect={false}
        autoCapitalize='none'
+      
        value={email}
        onChangeText={ (text) => setEmail(text)}
+       
        />
 
        <AreaInput
        placeholder="Password"
        autoCorrect={false}
        autoCapitalize='none'
+       secureTextEntry={true}
        value={password}
        onChangeText={ (text) => setPassword(text)}
        />
