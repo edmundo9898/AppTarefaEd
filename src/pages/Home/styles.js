@@ -75,7 +75,7 @@ background-color: rgba(12, 12,12 , 0.6);
 `;
 
 export const ContainerModal = styled.View`
-background-color: #121212;
+background-color: orange;
 height: 200px;
 width: 100%;
 border-radius: 5px;
