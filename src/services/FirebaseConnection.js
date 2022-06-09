@@ -1,8 +1,7 @@
-import firebase from 'firebase/app'
+import firebase from "firebase/app";
 
-import 'firebase/database';
-import 'firebase/auth';
-
+import "firebase/database";
+import "firebase/auth";
 
 let firebaseConfig = {
   apiKey: "AIzaSyB9qJ8Ig2TNXGiOKlG50u-RaB5pN6j76cA",
@@ -12,13 +11,13 @@ let firebaseConfig = {
   storageBucket: "meu-app-e081a.appspot.com",
   messagingSenderId: "787084097347",
   appId: "1:787084097347:web:b1dd1fb9d6c45bebb3e1f6",
-  measurementId: "G-MKP106V7WH"
+  measurementId: "G-MKP106V7WH",
 };
 
 // Initialize Firebase
 
-if (!firebase.apps.lenth){
-    firebase.initializeApp(firebaseConfig)
+if (!firebase.apps.lenth) {
+  firebase.initializeApp(firebaseConfig);
 }
 
 export default firebase;

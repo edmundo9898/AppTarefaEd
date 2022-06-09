@@ -1,74 +1,70 @@
-import React, {useState, useContext} from 'react';
-import { StatusBar } from 'expo-status-bar';
+import React, { useState, useContext } from "react";
+import { StatusBar } from "expo-status-bar";
 
-import { useNavigation } from '@react-navigation/native';
-import { Platform } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+import { Text } from "react-native";
 
-import {Container, TextLogo, AreaInput, SubmitBtn, Textbtn, Link, TextLink} from './styles';
+import {
+  Container,
+  TextLogo,
+  AreaInput,
+  SubmitBtn,
+  Textbtn,
+  Link,
+  TextLink,
+} from "./styles";
 
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5 } from "@expo/vector-icons";
 
-import {AuthContext} from '../../Context/auth';
-
-
+import { AuthContext } from "../../Context/auth";
 
 export default function SignIn() {
+  const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const navigation = useNavigation();  
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  // Criando o context para a tela ter acesso ao value user.
+  const { signIn } = useContext(AuthContext);
 
-   // Criando o context para a tela ter acesso ao value user.
-   const {signIn} = useContext(AuthContext);
-
-    
-  function accessSignIn(){
-      signIn(email, password);
+  function accessSignIn() {
+    signIn(email, password);
   }
 
+  return (
+    <Container
+      //Verifica o sistema operacional que está usando
+      behavior={Platform.OS === "ios" ? "padding" : ""}
+      //Já comeco como True
+      enabled
+    >
+      <StatusBar backgroundColor="orange" />
+      {/* <TextLogo>AppTarefaEd</TextLogo> */}
+      <TextLogo>AppTaskList</TextLogo>
+      <AreaInput
+        style={{ marginTop: 20 }}
+        placeholder="Email"
+        autoCorrect={false}
+        autoCapitalize="none"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+      />
 
- return (
-   <Container
-   //Verifica o sistema operacional que está usando
-   behavior={Platform.OS === 'ios' ? 'padding' : ''}
-   //Já comeco como True
-   enabled
-   >
-       <StatusBar backgroundColor='orange'/>
-       {/* <TextLogo>AppTarefaEd</TextLogo> */}
-       <FontAwesome5 name="clipboard-list" size={90} color="orange"/>
+      <AreaInput
+        placeholder="Password"
+        autoCorrect={false}
+        autoCapitalize="none"
+        secureTextEntry={true}
+        value={password}
+        onChangeText={(text) => setPassword(text)}
+      />
 
-       <AreaInput
-       style={{marginTop: 20}}
-       placeholder="Email"
-       autoCorrect={false}
-       autoCapitalize='none'
-      
-       value={email}
-       onChangeText={ (text) => setEmail(text)}
-       
-       />
+      <SubmitBtn onPress={accessSignIn}>
+        <Textbtn>Acessar</Textbtn>
+      </SubmitBtn>
 
-       <AreaInput
-       placeholder="Password"
-       autoCorrect={false}
-       autoCapitalize='none'
-       secureTextEntry={true}
-       value={password}
-       onChangeText={ (text) => setPassword(text)}
-       />
-
-       <SubmitBtn onPress={accessSignIn}>
-           <Textbtn>
-               Acessar
-           </Textbtn>
-       </SubmitBtn>
-
-       <Link onPress={() => navigation.navigate('SignUp')}>
-           <TextLink>
-               Não tem conta ?
-           </TextLink>
-       </Link>
-   </Container>
- );
+      <Link onPress={() => navigation.navigate("SignUp")}>
+        <TextLink>Não tem conta ?</TextLink>
+      </Link>
+    </Container>
+  );
 }

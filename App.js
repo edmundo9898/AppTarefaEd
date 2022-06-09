@@ -1,23 +1,19 @@
-import 'react-native-gesture-handler';
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import AuthProvider from './src/Context/auth';
+import "react-native-gesture-handler";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import AuthProvider from "./src/Context/auth";
 // Importando Routes (de onde vem as telas do App)
-import Routes from './src/Routes';
+import Routes from "./src/Routes";
 
-console.disableYellowBox=true;
+console.disableYellowBox = true;
 // agora tudo dentro de AuthProvider terá o acesso / repassando  do User
 
-export default function App(){
-
-  return(
+export default function App() {
+  return (
     <NavigationContainer>
       <AuthProvider>
-       <Routes />
+        <Routes />
       </AuthProvider>
     </NavigationContainer>
-  
-      
-
   );
 }

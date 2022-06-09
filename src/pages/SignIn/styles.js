@@ -12,7 +12,9 @@ justify-content: center;
 export const TextLogo = styled.Text`
 color: white;
 font-size: 50px;
-margin-bottom: 25px;
+margin-bottom: 2px;
+color: #009900;
+font-weight: bold;
 `;
 
 export const AreaInput = styled.TextInput.attrs({
@@ -43,7 +45,7 @@ background-color:  #009900;
 
 export const Textbtn = styled.Text`
 color: #fff;
-font-size: 16px;
+font-size: 19px;
 
 `;
 
