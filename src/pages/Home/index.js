@@ -133,7 +133,7 @@ export default function Home() {
     <Container>
       <StatusBar backgroundColor="orange" />
       <ContainerTextStart>
-        <TextStart>Olá, {user && user.nome} !!</TextStart>
+        <TextStart>Olá, {user && user.nome}.</TextStart>
 
         <TouchableOpacity onPress={() => signOut()}>
           <AntDesign name="logout" size={30} color="#00cc44" />

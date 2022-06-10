@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 
 import { useNavigation } from "@react-navigation/native";
-import { Text } from "react-native";
+import { ActivityIndicator } from "react-native";
 
 import {
   Container,
@@ -14,8 +14,6 @@ import {
   TextLink,
 } from "./styles";
 
-import { FontAwesome5 } from "@expo/vector-icons";
-
 import { AuthContext } from "../../Context/auth";
 
 export default function SignIn() {
@@ -24,7 +22,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
 
   // Criando o context para a tela ter acesso ao value user.
-  const { signIn } = useContext(AuthContext);
+  const { signIn, loadingAuth } = useContext(AuthContext);
 
   function accessSignIn() {
     signIn(email, password);
@@ -50,7 +48,7 @@ export default function SignIn() {
       />
 
       <AreaInput
-        placeholder="Password"
+        placeholder="***********"
         autoCorrect={false}
         autoCapitalize="none"
         secureTextEntry={true}
@@ -59,7 +57,11 @@ export default function SignIn() {
       />
 
       <SubmitBtn onPress={accessSignIn}>
-        <Textbtn>Acessar</Textbtn>
+        {loadingAuth ? (
+          <ActivityIndicator size={20} color="#fff" />
+        ) : (
+          <Textbtn>Acessar</Textbtn>
+        )}
       </SubmitBtn>
 
       <Link onPress={() => navigation.navigate("SignUp")}>

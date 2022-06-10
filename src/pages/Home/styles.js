@@ -12,11 +12,11 @@ justify-content: center;
 
 export const  ContainerTextStart = styled.View`
 width: 100%;
-height: 30px;
+height: 40px;
 align-items: center;
 justify-content: space-between ;
 margin-bottom: 15px;
-margin-top: 40px;
+margin-top: 50px;
 padding-left: 15px;
 padding-right: 30px;
 flex-direction: row;
@@ -70,14 +70,14 @@ justify-content: center;
 export const ContainerCenterModal = styled.View`
 flex: 1;
 align-items: center;
-justify-content: flex-end;
+justify-content: center;
 background-color: rgba(12, 12,12 , 0.6);
 `;
 
 export const ContainerModal = styled.View`
 background-color: orange;
 height: 200px;
-width: 100%;
+width: 90%;
 border-radius: 5px;
 align-items: center;
 justify-content: center;

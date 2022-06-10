@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
-
+import { ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import {
@@ -26,7 +26,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
 
   // chamando a função de cadastro na pasta Context
-  const { signUp } = useContext(AuthContext);
+  const { signUp, loadingAuth } = useContext(AuthContext);
 
   //chamando a função Para cadastrar no firebase
   function register() {
@@ -66,7 +66,11 @@ export default function SignUp() {
       />
 
       <SubmitBtn onPress={register}>
-        <Textbtn>Cadastrar</Textbtn>
+        {loadingAuth ? (
+          <ActivityIndicator size={20} color="#fff" />
+        ) : (
+          <Textbtn>Cadastrar</Textbtn>
+        )}
       </SubmitBtn>
 
       <Link onPress={() => navigation.navigate("SignIn")}>

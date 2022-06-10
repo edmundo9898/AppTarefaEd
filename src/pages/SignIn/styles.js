@@ -18,21 +18,22 @@ font-weight: bold;
 `;
 
 export const AreaInput = styled.TextInput.attrs({
-    placeholderTextColor: '#000'
+    placeholderTextColor: '#909090'
 })`
-width: 80%;
+width: 85%;
 height: 50px;
 padding: 10px;
 border-width: 2px;
 border-color: #000;
 border-radius: 10px;
-margin: 15px;
+margin: 10px;
 background-color: #fff;
+font-size: 20px;
 
 `;
 
 export const SubmitBtn = styled.TouchableOpacity`
-width: 80%;
+width: 85%;
 height: 50px;
 margin-top: 10px;
 border-width: 1px;

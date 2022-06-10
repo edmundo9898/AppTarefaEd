@@ -9,6 +9,7 @@ function AuthProvider({ children }) {
   // a const user dentro do authContext servira para da acesso ao user em outras páginas do aplicativo
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [loadingAuth, setLoadingAuth] = useState(false);
 
   useEffect(() => {
     async function loadStorage() {
@@ -27,6 +28,7 @@ function AuthProvider({ children }) {
 
   // cadastrando usuario
   async function signUp(email, password, nome) {
+    setLoadingAuth(true);
     //criando usuario no firebase
     await firebase
       .auth()
@@ -52,15 +54,19 @@ function AuthProvider({ children }) {
             };
             setUser(data);
             storageUser(data);
+            setLoadingAuth(false);
           });
       })
       .catch((error) => {
         alert(error.code);
+        setLoadingAuth(false);
       });
   }
 
   // função para acessar
   async function signIn(email, password) {
+    setLoadingAuth(true);
+
     await firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -80,10 +86,12 @@ function AuthProvider({ children }) {
             setUser(data);
             //está salvando os dados só quando acessa ou faz o cadastro.
             storageUser(data);
-          })
-          .catch((error) => {
-            alert(error.code);
+            setLoadingAuth(false);
           });
+      })
+      .catch((error) => {
+        alert(error.code);
+        setLoadingAuth(false);
       });
   }
 
@@ -106,7 +114,15 @@ function AuthProvider({ children }) {
   return (
     // convertendo user para bolean (false)
     <AuthContext.Provider
-      value={{ signed: !!user, user, signIn, signUp, loading, signOut }}
+      value={{
+        signed: !!user,
+        user,
+        signIn,
+        signUp,
+        loading,
+        signOut,
+        loadingAuth,
+      }}
     >
       {children}
     </AuthContext.Provider>

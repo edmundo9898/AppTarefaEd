@@ -31,7 +31,7 @@ function AuthRoutes() {
           },
           headerTintColor: "#fff",
           headerBackTitleVisible: false,
-          headerTitle: "Back",
+          headerTitle: "Voltar",
         }}
       />
     </AuthStack.Navigator>
